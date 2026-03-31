@@ -9,6 +9,12 @@ export function registerChatParticipant(
   context: vscode.ExtensionContext,
   authManager: AuthManager
 ): void {
+  // Guard: vscode.chat may not exist if Copilot Chat is not installed
+  if (!vscode.chat?.createChatParticipant) {
+    console.log('[Skill Sync] Copilot Chat not available — chat participant disabled.');
+    return;
+  }
+
   const participant = vscode.chat.createChatParticipant(
     'skill-sync.participant',
     async (request, _context, response, token) => {
@@ -41,7 +47,7 @@ export function registerChatParticipant(
     }
   );
 
-  participant.iconPath = vscode.Uri.joinPath(context.extensionUri, 'images', 'icon.svg');
+  participant.iconPath = vscode.Uri.joinPath(context.extensionUri, 'images', 'icon-128.png');
   context.subscriptions.push(participant);
 }
 

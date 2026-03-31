@@ -151,6 +151,33 @@ All commands are available from the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift
 | `Skill Sync: Set GitHub Token` | Store or replace your GitHub Personal Access Token |
 | `Skill Sync: Clear GitHub Token` | Remove the stored token from your keychain |
 
+## Chat Participant (`@skill-sync`)
+
+Skill-Sync registers as a chat participant in VS Code's built-in chat (and Copilot Chat). Type `@skill-sync` in the chat panel to access these commands:
+
+| Command | Description |
+|---|---|
+| `@skill-sync /status` | Show a table of all skill files and their sync state |
+| `@skill-sync /update` | Check for outdated files and offer Accept buttons inline |
+| `@skill-sync /token` | Set or update your GitHub PAT |
+| `@skill-sync /disable` | Set `auto_update: false` on the currently open skill file |
+
+Typing `@skill-sync` without a command shows a help message with all available commands.
+
+**Example:**
+
+```
+> @skill-sync /status
+
+| File                  | Status       | Version |
+|-----------------------|--------------|---------|
+| src/SKILL.md          | ✓ up to date | 1.4.2   |
+| flutter/CLAUDE.md     | ↑ outdated   | 1.1.0   |
+| ios/SKILL.md          | — manual     | 2.0.0   |
+```
+
+> Note: The slash commands only appear after typing `@skill-sync /` — they are scoped to the participant and won't show in the global `/` list.
+
 ## Authentication
 
 Skill-Sync requires a GitHub Personal Access Token (PAT) with read access to the repos hosting your skill files.
