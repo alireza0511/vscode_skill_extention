@@ -3,7 +3,7 @@
   "displayName": "Skill Sync",
   "description": "Keep SKILL.md and CLAUDE.md files in sync with their remote GitHub sources",
   "version": "0.1.0",
-  "publisher": "alireza",
+  "publisher": "alirezakhakpour",
   "icon": "images/icon-128.png",
   "repository": {
     "type": "git",
