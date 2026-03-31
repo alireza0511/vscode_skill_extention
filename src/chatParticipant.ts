@@ -11,12 +11,12 @@ export function registerChatParticipant(
 ): void {
   // Guard: vscode.chat may not exist if Copilot Chat is not installed
   if (!vscode.chat?.createChatParticipant) {
-    console.log('[Skill Sync] Copilot Chat not available — chat participant disabled.');
+    console.log('[SkillSource] Copilot Chat not available — chat participant disabled.');
     return;
   }
 
   const participant = vscode.chat.createChatParticipant(
-    'skill-sync.participant',
+    'skillsource.participant',
     async (request, _context, response, token) => {
       switch (request.command) {
         case 'update':
@@ -210,6 +210,6 @@ async function handleDisable(
 
   response.markdown(
     `\`auto_update\` set to \`false\` in \`${vscode.workspace.asRelativePath(doc.uri)}\`. ` +
-    'Skill-Sync will no longer check this file for updates.'
+    'SkillSource will no longer check this file for updates.'
   );
 }

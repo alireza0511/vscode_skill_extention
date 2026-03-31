@@ -1,6 +1,6 @@
 {
-  "name": "skill-sync",
-  "displayName": "Skill Sync",
+  "name": "skillsource",
+  "displayName": "SkillSource",
   "description": "Keep SKILL.md and CLAUDE.md files in sync with their remote GitHub sources",
   "version": "0.1.0",
   "publisher": "alirezakhakpour",
@@ -24,9 +24,9 @@
   "contributes": {
     "chatParticipants": [
       {
-        "id": "skill-sync.participant",
-        "name": "skill-sync",
-        "fullName": "Skill Sync",
+        "id": "skillsource.participant",
+        "name": "skillsource",
+        "fullName": "SkillSource",
         "description": "Manage and update your AI instruction files",
         "isSticky": false,
         "commands": [
@@ -52,19 +52,19 @@
     "commands": [
       {
         "command": "skillSync.checkForUpdates",
-        "title": "Skill Sync: Check for Updates"
+        "title": "SkillSource: Check for Updates"
       },
       {
         "command": "skillSync.setToken",
-        "title": "Skill Sync: Set GitHub Token"
+        "title": "SkillSource: Set GitHub Token"
       },
       {
         "command": "skillSync.clearToken",
-        "title": "Skill Sync: Clear GitHub Token"
+        "title": "SkillSource: Clear GitHub Token"
       }
     ],
     "configuration": {
-      "title": "Skill Sync",
+      "title": "SkillSource",
       "properties": {
         "skillSync.githubBaseUrl": {
           "type": "string",

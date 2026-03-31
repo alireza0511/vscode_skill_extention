@@ -19,7 +19,7 @@ export class AuthManager {
 
   async promptForToken(): Promise<string | undefined> {
     const token = await vscode.window.showInputBox({
-      title: 'Skill Sync: GitHub Personal Access Token',
+      title: 'SkillSource: GitHub Personal Access Token',
       prompt: 'Enter a GitHub PAT with repo read access. It will be stored securely in your system keychain.',
       password: true,
       ignoreFocusOut: true,

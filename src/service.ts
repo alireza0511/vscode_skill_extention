@@ -36,7 +36,7 @@ export async function findOutdatedFiles(
     if (result.status === 'fulfilled' && result.value) {
       outdated.push(result.value);
     } else if (result.status === 'rejected') {
-      console.warn('[Skill Sync]', result.reason);
+      console.warn('[SkillSource]', result.reason);
     }
   }
 

@@ -1,28 +1,28 @@
-# Skill-Sync
+# SkillSource
 
 **Keep your AI instruction files in sync — automatically.**
 
-[![Version](https://img.shields.io/visual-studio-marketplace/v/alireza.skill-sync)](https://marketplace.visualstudio.com/items?itemName=alireza.skill-sync)
-[![Installs](https://img.shields.io/visual-studio-marketplace/i/alireza.skill-sync)](https://marketplace.visualstudio.com/items?itemName=alireza.skill-sync)
-[![Rating](https://img.shields.io/visual-studio-marketplace/r/alireza.skill-sync)](https://marketplace.visualstudio.com/items?itemName=alireza.skill-sync)
+[![Version](https://img.shields.io/visual-studio-marketplace/v/alirezakhakpour.skillsource)](https://marketplace.visualstudio.com/items?itemName=alirezakhakpour.skillsource)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/alirezakhakpour.skillsource)](https://marketplace.visualstudio.com/items?itemName=alirezakhakpour.skillsource)
+[![Rating](https://img.shields.io/visual-studio-marketplace/r/alirezakhakpour.skillsource)](https://marketplace.visualstudio.com/items?itemName=alirezakhakpour.skillsource)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
 
 If you use Claude Code, GitHub Copilot, or any AI coding assistant, you probably have `SKILL.md` or `CLAUDE.md` files scattered across your repos. They start as copies of a shared original — and then they silently go stale.
 
-Skill-Sync fixes that. It reads a `source` URL from each file's frontmatter, checks GitHub for updates on startup, and lets you review changes through VS Code's built-in diff editor. No files are overwritten without your approval. Ever.
+SkillSource fixes that. It reads a `source` URL from each file's frontmatter, checks GitHub for updates on startup, and lets you review changes through VS Code's built-in diff editor. No files are overwritten without your approval. Ever.
 
 ## Features
 
 - **Automatic update detection** — scans your workspace on startup and flags outdated skill files
 - **Diff-based review** — see exactly what changed before accepting an update, using VS Code's native diff viewer
 - **Per-file control** — each file opts in or out via its own frontmatter, no global config to manage
-- **`source.md` fallback** — for public skills that don't embed a source URL, drop a `source.md` next to the file and Skill-Sync picks it up automatically
+- **`source.md` fallback** — for public skills that don't embed a source URL, drop a `source.md` next to the file and SkillSource picks it up automatically
 - **Secure token storage** — your GitHub PAT is stored in VS Code's SecretStorage (OS keychain), never in settings.json
 - **Status bar at a glance** — always know if your skill files are current, outdated, or missing auth
 - **GitHub Enterprise support** — configure a custom API base URL for enterprise installations
-- **Non-destructive by design** — Skill-Sync is read-only; it will never push changes upstream or overwrite files without explicit confirmation
+- **Non-destructive by design** — SkillSource is read-only; it will never push changes upstream or overwrite files without explicit confirmation
 
 Works great alongside [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [GitHub Copilot](https://github.com/features/copilot).
 
@@ -63,21 +63,21 @@ source: https://github.com/some-org/skills/blob/main/flutter/SKILL.md
 ---
 ```
 
-Skill-Sync checks the file's own frontmatter first. If no `source` is found there, it looks for a sibling `source.md`.
+SkillSource checks the file's own frontmatter first. If no `source` is found there, it looks for a sibling `source.md`.
 
 **2. Set your GitHub token**
 
 Open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) and run:
 
 ```
-Skill Sync: Set GitHub Token
+SkillSource: Set GitHub Token
 ```
 
 Enter a GitHub Personal Access Token with read access to the repositories that host your skill files. The token is stored securely in your OS keychain via VS Code's SecretStorage API — it never touches `settings.json` or any file on disk.
 
 **3. That's it**
 
-Skill-Sync will check for updates every time your workspace opens. If any files are outdated, you'll see a notification and a status bar badge. Click to review the diffs and decide what to update.
+SkillSource will check for updates every time your workspace opens. If any files are outdated, you'll see a notification and a status bar badge. Click to review the diffs and decide what to update.
 
 ## Frontmatter Reference
 
@@ -105,7 +105,7 @@ The frontmatter convention is stored in the file itself, not in VS Code settings
 
 ## Source Resolution
 
-Skill-Sync resolves the upstream URL for each skill file using this lookup order:
+SkillSource resolves the upstream URL for each skill file using this lookup order:
 
 1. **Inline frontmatter** — the `source` field in the skill file's own `---` block
 2. **Sibling `source.md`** — a file named `source.md` in the same directory
@@ -147,27 +147,27 @@ All commands are available from the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift
 
 | Command | Description |
 |---|---|
-| `Skill Sync: Check for Updates` | Manually trigger an update check across the workspace |
-| `Skill Sync: Set GitHub Token` | Store or replace your GitHub Personal Access Token |
-| `Skill Sync: Clear GitHub Token` | Remove the stored token from your keychain |
+| `SkillSource: Check for Updates` | Manually trigger an update check across the workspace |
+| `SkillSource: Set GitHub Token` | Store or replace your GitHub Personal Access Token |
+| `SkillSource: Clear GitHub Token` | Remove the stored token from your keychain |
 
-## Chat Participant (`@skill-sync`)
+## Chat Participant (`@skillsource`)
 
-Skill-Sync registers as a chat participant in VS Code's built-in chat (and Copilot Chat). Type `@skill-sync` in the chat panel to access these commands:
+SkillSource registers as a chat participant in VS Code's built-in chat (and Copilot Chat). Type `@skillsource` in the chat panel to access these commands:
 
 | Command | Description |
 |---|---|
-| `@skill-sync /status` | Show a table of all skill files and their sync state |
-| `@skill-sync /update` | Check for outdated files and offer Accept buttons inline |
-| `@skill-sync /token` | Set or update your GitHub PAT |
-| `@skill-sync /disable` | Set `auto_update: false` on the currently open skill file |
+| `@skillsource /status` | Show a table of all skill files and their sync state |
+| `@skillsource /update` | Check for outdated files and offer Accept buttons inline |
+| `@skillsource /token` | Set or update your GitHub PAT |
+| `@skillsource /disable` | Set `auto_update: false` on the currently open skill file |
 
-Typing `@skill-sync` without a command shows a help message with all available commands.
+Typing `@skillsource` without a command shows a help message with all available commands.
 
 **Example:**
 
 ```
-> @skill-sync /status
+> @skillsource /status
 
 | File                  | Status       | Version |
 |-----------------------|--------------|---------|
@@ -176,11 +176,11 @@ Typing `@skill-sync` without a command shows a help message with all available c
 | ios/SKILL.md          | — manual     | 2.0.0   |
 ```
 
-> Note: The slash commands only appear after typing `@skill-sync /` — they are scoped to the participant and won't show in the global `/` list.
+> Note: The slash commands only appear after typing `@skillsource /` — they are scoped to the participant and won't show in the global `/` list.
 
 ## Authentication
 
-Skill-Sync requires a GitHub Personal Access Token (PAT) with read access to the repos hosting your skill files.
+SkillSource requires a GitHub Personal Access Token (PAT) with read access to the repos hosting your skill files.
 
 **Creating a token:**
 
@@ -217,7 +217,7 @@ Planned for future releases:
 - **Workspace trust integration** — respect VS Code's workspace trust settings
 - **Change notifications for watched files** — detect local edits to tracked files and warn before they drift
 
-Have a feature request? [Open an issue](https://github.com/alireza/skill-sync/issues).
+Have a feature request? [Open an issue](https://github.com/alireza0511/vscode_skill_extention/issues).
 
 ## Contributing
 

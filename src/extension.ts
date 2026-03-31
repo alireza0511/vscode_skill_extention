@@ -39,7 +39,7 @@ async function handleCheckForUpdates(): Promise<void> {
   if (!token) {
     statusBar.setState('auth-missing');
     const action = await vscode.window.showWarningMessage(
-      'Skill Sync needs a GitHub token to check for updates.',
+      'SkillSource needs a GitHub token to check for updates.',
       'Set Token',
       'Later'
     );
@@ -92,7 +92,7 @@ async function handleCheckForUpdates(): Promise<void> {
     if (message.includes('auth failed')) {
       statusBar.setState('auth-missing');
       const action = await vscode.window.showErrorMessage(
-        `Skill Sync: ${message}`,
+        `SkillSource: ${message}`,
         'Update Token'
       );
       if (action === 'Update Token') {
@@ -100,7 +100,7 @@ async function handleCheckForUpdates(): Promise<void> {
       }
     } else {
       statusBar.setState('up-to-date');
-      vscode.window.showErrorMessage(`Skill Sync: ${message}`);
+      vscode.window.showErrorMessage(`SkillSource: ${message}`);
     }
   }
 }
@@ -108,7 +108,7 @@ async function handleCheckForUpdates(): Promise<void> {
 async function handleSetToken(): Promise<void> {
   const token = await authManager.promptForToken();
   if (token) {
-    vscode.window.showInformationMessage('Skill Sync: GitHub token saved.');
+    vscode.window.showInformationMessage('SkillSource: GitHub token saved.');
     await handleCheckForUpdates();
   }
 }
@@ -116,7 +116,7 @@ async function handleSetToken(): Promise<void> {
 async function handleClearToken(): Promise<void> {
   await authManager.clearToken();
   statusBar.setState('auth-missing');
-  vscode.window.showInformationMessage('Skill Sync: GitHub token cleared.');
+  vscode.window.showInformationMessage('SkillSource: GitHub token cleared.');
 }
 
 async function handleAcceptUpdate(uriString: string, remoteContent: string): Promise<void> {
@@ -131,6 +131,6 @@ async function handleAcceptUpdate(uriString: string, remoteContent: string): Pro
   await vscode.workspace.applyEdit(edit);
   await doc.save();
   vscode.window.showInformationMessage(
-    `Skill Sync: Updated ${vscode.workspace.asRelativePath(uri)}`
+    `SkillSource: Updated ${vscode.workspace.asRelativePath(uri)}`
   );
 }
