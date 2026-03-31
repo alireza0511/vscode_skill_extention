@@ -1,0 +1,90 @@
+{
+  "name": "skill-sync",
+  "displayName": "Skill Sync",
+  "description": "Keep SKILL.md and CLAUDE.md files in sync with their remote GitHub sources",
+  "version": "0.1.0",
+  "publisher": "alireza",
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "extensionDependencies": [
+    "github.copilot-chat"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/SKILL.md",
+    "workspaceContains:**/CLAUDE.md"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "skill-sync.participant",
+        "name": "skill-sync",
+        "fullName": "Skill Sync",
+        "description": "Manage and update your AI instruction files",
+        "isSticky": false,
+        "commands": [
+          {
+            "name": "update",
+            "description": "Check and update all outdated SKILL.md files"
+          },
+          {
+            "name": "status",
+            "description": "Show sync status of all skill files in this workspace"
+          },
+          {
+            "name": "token",
+            "description": "Set or update your GitHub Personal Access Token"
+          },
+          {
+            "name": "disable",
+            "description": "Set auto_update: false on the currently open skill file"
+          }
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "skillSync.checkForUpdates",
+        "title": "Skill Sync: Check for Updates"
+      },
+      {
+        "command": "skillSync.setToken",
+        "title": "Skill Sync: Set GitHub Token"
+      },
+      {
+        "command": "skillSync.clearToken",
+        "title": "Skill Sync: Clear GitHub Token"
+      }
+    ],
+    "configuration": {
+      "title": "Skill Sync",
+      "properties": {
+        "skillSync.githubBaseUrl": {
+          "type": "string",
+          "default": "https://api.github.com",
+          "description": "GitHub API base URL (change for GitHub Enterprise)"
+        },
+        "skillSync.filePatterns": {
+          "type": "array",
+          "default": ["**/SKILL.md", "**/CLAUDE.md"],
+          "description": "Glob patterns for skill files to watch"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --sourcemap",
+    "watch": "npm run compile -- --watch",
+    "package": "npm run compile -- --minify",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.20.0",
+    "typescript": "^5.3.0"
+  }
+}
