@@ -5,6 +5,11 @@
   "version": "0.1.0",
   "publisher": "alireza",
   "icon": "images/icon-128.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alireza0511/vscode_skill_extention"
+  },
+  "license": "MIT",
   "engines": {
     "vscode": "^1.93.0"
   },
